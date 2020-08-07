@@ -15,11 +15,13 @@ public class Player extends Creature implements ICreature {
 
 	public Assignment assi;
 
-	private PVector mouseClickPos;
+	public static PVector mouseClickPos;
 
 	private int leftHandPosY, rightHandPosY;
-	
+
 	public static int numberOfPlayers;
+
+	private boolean isNewMousePos;
 
 	// Punch
 	private int punchRun;
@@ -30,11 +32,11 @@ public class Player extends Creature implements ICreature {
 
 	public Player(PApplet parent) {
 		this.parent = parent;
-		
+
 		parent.ellipseMode(PConstants.CENTER); // Makes the ellipse centered
 
 		// Player stats
-		numberOfPlayers=6;
+		numberOfPlayers = 2;
 		health = 100;
 
 		// Player pos
@@ -46,6 +48,8 @@ public class Player extends Creature implements ICreature {
 		rightHandPosY = 0;
 		leftHandPosY = 0;
 		speed = 1;
+
+		isNewMousePos = false;
 
 		// Controls
 		assi = Assignment.IDLE;
@@ -59,7 +63,7 @@ public class Player extends Creature implements ICreature {
 		armsColor = new Color(80, 100, 70); // Color of the arms
 	}
 
-	//Later
+	// Later
 	private void punch() {
 		if (whichArm) {
 			if (punchRun < 5) {
@@ -77,15 +81,15 @@ public class Player extends Creature implements ICreature {
 
 		punchRun++;
 	}
-	
+
 	public void line() {
-		//Line between player and mouseClickPos
+		// Line between player and mouseClickPos
 		parent.line(location.x, location.y, mouseClickPos.x, mouseClickPos.y);
 	}
 
 	@Override
 	public void render() {
-		
+
 		// Rotates towards where the player is walking
 		float angle = PApplet.atan2(look.y - location.y, look.x - location.x);
 
@@ -93,7 +97,7 @@ public class Player extends Creature implements ICreature {
 
 		parent.translate(location.x, location.y);
 		parent.rotate(angle + PApplet.HALF_PI); // Rotates the player
-		
+
 		// Body
 		parent.noStroke(); // No black lines around the ellipse
 		parent.fill(color.getRGB()); // Sets the color of the player
@@ -102,8 +106,11 @@ public class Player extends Creature implements ICreature {
 		// Arms
 		parent.stroke(1); // Black lines around the ellipse
 		parent.fill(armsColor.getRGB());
-		parent.ellipse(0 + 5, 0 + rightHandPosY - 5, 5, 5);
-		parent.ellipse(0 - 5, 0 + leftHandPosY - 5, 5, 5);
+		parent.ellipse(0 + 10, 0 + rightHandPosY - 4, 5, 5);
+		parent.ellipse(0 - 10, 0 + leftHandPosY - 4, 5, 5);
+
+		// Head
+		parent.ellipse(0, 0, 10, 10);
 
 		parent.popMatrix(); // Restore
 	}
@@ -126,7 +133,7 @@ public class Player extends Creature implements ICreature {
 			// Freeze the movements and start looking around. Later use
 			break;
 		case MOVE:
-			
+
 			moveToLocation(mouseClickPos);
 
 			if (movedToLocation(mouseClickPos)) {
@@ -161,16 +168,39 @@ public class Player extends Creature implements ICreature {
 		}
 	}
 
+	public boolean movedToMouseClickPos(PVector mouseClickPos) {
+		/*
+		 * Need to set this to true so that the walkline doesn't show when the
+		 * destination is reached.
+		 */
+		boolean temp = true;
+
+		//If a new mouseClickPos has been set
+		if (isNewMousePos) {
+			temp = false;
+
+			//If player location is equal to mouseClickPos but with 4 radius
+			if (location.x - 2 < mouseClickPos.x && location.x + 2 > mouseClickPos.x && location.y - 2 < mouseClickPos.y
+					&& location.y + 2 > mouseClickPos.y) {
+				
+				isNewMousePos = false;
+				temp = true;
+			}
+		}
+		return temp;
+	}
+
 	/*
 	 * SETTERS & GETTERS
 	 */
-	
+
 	public void setLookPos(int x, int y) {
 		look = new PVector(x, y);
 	}
 
 	public void setMouseClickPos(int x, int y) {
 		mouseClickPos = new PVector(x, y);
+		isNewMousePos = true;
 	}
 
 	public void setAssignment(Assignment assi) {

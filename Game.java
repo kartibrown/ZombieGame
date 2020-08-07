@@ -41,6 +41,9 @@ public class Game extends PApplet {
 
 		if (mainMenu || pause) {
 			if (!init) {
+				/*
+				 * Initializing players for the pause- and main menu
+				 */
 				player = new Player[15];
 
 				for (int i = 0; i < player.length; i++) {
@@ -50,10 +53,12 @@ public class Game extends PApplet {
 				init = true;
 			}
 
+			// Exits if the exit button is clicked
 			if (menu.isExit()) {
 				exit();
 			}
 
+			// Render the world
 			field.render();
 
 			for (int i = 0; i < player.length; i++) {
@@ -65,6 +70,9 @@ public class Game extends PApplet {
 
 		} else {
 			if (!init) {
+				/*
+				 * Initializing the players to the game
+				 */
 				player = new Player[200];
 
 				for (int i = 0; i < player.length; i++) {
@@ -74,13 +82,17 @@ public class Game extends PApplet {
 				init = true;
 			}
 
-			field.render(); // Renders the field, the game area
+			field.render(); // Render the field, the game world
 
-			camera.updateCamera(); // Updates the camera pos
+			camera.updateCamera(); // Updates the camera position
 			camera.updateKeyControls(); // Updates the camera controls
 
 			for (int i = 0; i < Player.numberOfPlayers; i++) {
-				player[i].line();
+				if (!player[i].movedToMouseClickPos(Player.mouseClickPos)) {
+
+					// If players has NOT reached the mouseClickPos then show walkline
+					player[i].line();
+				}
 				player[i].render();
 				player[i].move();
 			}
@@ -93,7 +105,7 @@ public class Game extends PApplet {
 	@Override
 	public void mousePressed() {
 		if (mouseButton == LEFT) {
-			
+
 		} else if (mouseButton == RIGHT) {
 		}
 	}
@@ -123,9 +135,11 @@ public class Game extends PApplet {
 	@Override
 	public void mouseReleased() {
 		if (mouseButton == LEFT) {
-			player[0].setMouseClickPos((int) (mouseX - Camera.location.x), (int) (mouseY - Camera.location.y));
-			player[0].setLookPos((int) (mouseX - Camera.location.x), (int) (mouseY - Camera.location.y));
-			player[0].setAssignment(Assignment.MOVE);
+			for (int i = 0; i < Player.numberOfPlayers; i++) {
+				player[i].setMouseClickPos((int) (mouseX - Camera.location.x), (int) (mouseY - Camera.location.y));
+				player[i].setLookPos((int) (mouseX - Camera.location.x), (int) (mouseY - Camera.location.y));
+				player[i].setAssignment(Assignment.MOVE);
+			}
 		} else if (mouseButton == RIGHT) {
 		}
 	}
