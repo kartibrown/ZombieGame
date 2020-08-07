@@ -34,7 +34,7 @@ public class Player extends Creature implements ICreature {
 		parent.ellipseMode(PConstants.CENTER); // Makes the ellipse centered
 
 		// Player stats
-		numberOfPlayers=5;
+		numberOfPlayers=6;
 		health = 100;
 
 		// Player pos
@@ -59,6 +59,7 @@ public class Player extends Creature implements ICreature {
 		armsColor = new Color(80, 100, 70); // Color of the arms
 	}
 
+	//Later
 	private void punch() {
 		if (whichArm) {
 			if (punchRun < 5) {
