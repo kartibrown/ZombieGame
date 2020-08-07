@@ -1,9 +1,9 @@
-package randomGame;
+package zombieGame;
 
 import processing.core.PApplet;
-import randomGame.Camera.MoveX;
-import randomGame.Camera.MoveY;
-import randomGame.Player.Assignment;
+import zombieGame.Camera.MoveX;
+import zombieGame.Camera.MoveY;
+import zombieGame.Player.Assignment;
 
 public class Game extends PApplet {
 	private Menu menu;
@@ -37,7 +37,7 @@ public class Game extends PApplet {
 	@Override
 	public void draw() {
 		surface.setTitle("Survival game");
-		background(200); // draws the background and color
+		background(200); // Draws the background color
 
 		if (mainMenu || pause) {
 			if (!init) {
@@ -57,7 +57,6 @@ public class Game extends PApplet {
 			field.render();
 
 			for (int i = 0; i < player.length; i++) {
-				player[i].line();
 				player[i].render();
 				player[i].move();
 			}
@@ -80,7 +79,7 @@ public class Game extends PApplet {
 			camera.updateCamera(); // Updates the camera pos
 			camera.updateKeyControls(); // Updates the camera controls
 
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < Player.numberOfPlayers; i++) {
 				player[i].line();
 				player[i].render();
 				player[i].move();
@@ -94,6 +93,7 @@ public class Game extends PApplet {
 	@Override
 	public void mousePressed() {
 		if (mouseButton == LEFT) {
+			
 		} else if (mouseButton == RIGHT) {
 		}
 	}

@@ -1,4 +1,4 @@
-package randomGame;
+package zombieGame;
 
 import java.awt.Color;
 import java.util.ArrayList;

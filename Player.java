@@ -1,4 +1,4 @@
-package randomGame;
+package zombieGame;
 
 import java.awt.Color;
 
@@ -18,6 +18,8 @@ public class Player extends Creature implements ICreature {
 	private PVector mouseClickPos;
 
 	private int leftHandPosY, rightHandPosY;
+	
+	public static int numberOfPlayers;
 
 	// Punch
 	private int punchRun;
@@ -32,6 +34,7 @@ public class Player extends Creature implements ICreature {
 		parent.ellipseMode(PConstants.CENTER); // Makes the ellipse centered
 
 		// Player stats
+		numberOfPlayers=5;
 		health = 100;
 
 		// Player pos
@@ -76,7 +79,7 @@ public class Player extends Creature implements ICreature {
 	
 	public void line() {
 		//Line between player and mouseClickPos
-		parent.line(location.x, location.y, 100, 100);
+		parent.line(location.x, location.y, mouseClickPos.x, mouseClickPos.y);
 	}
 
 	@Override
@@ -160,7 +163,7 @@ public class Player extends Creature implements ICreature {
 	/*
 	 * SETTERS & GETTERS
 	 */
-
+	
 	public void setLookPos(int x, int y) {
 		look = new PVector(x, y);
 	}
