@@ -84,6 +84,7 @@ public class Player extends Creature implements ICreature {
 
 	public void line() {
 		// Line between player and mouseClickPos
+		parent.stroke(1);
 		parent.line(location.x, location.y, mouseClickPos.x, mouseClickPos.y);
 	}
 
