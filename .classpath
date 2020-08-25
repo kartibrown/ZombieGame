@@ -2,10 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Programmering/processing-3.5.4/core/library/core.jar"/>
-	<classpathentry kind="lib" path="C:/Programmering/processing-3.5.4/core/library/gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="C:/Programmering/processing-3.5.4/core/library/gluegen-rt-natives-windows-i586.jar"/>
-	<classpathentry kind="lib" path="C:/Programmering/processing-3.5.4/core/library/jogl-all.jar"/>
-	<classpathentry kind="lib" path="C:/Programmering/processing-3.5.4/core/library/jogl-all-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Programmering/Saves/Java/ZombieGame/RefLib/core.jar"/>
+	<classpathentry kind="lib" path="C:/Programmering/Saves/Java/ZombieGame/RefLib/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="C:/Programmering/Saves/Java/ZombieGame/RefLib/gluegen-rt-natives-windows-i586.jar"/>
+	<classpathentry kind="lib" path="C:/Programmering/Saves/Java/ZombieGame/RefLib/jogl-all.jar"/>
+	<classpathentry kind="lib" path="C:/Programmering/Saves/Java/ZombieGame/RefLib/jogl-all-natives-windows-i586.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
